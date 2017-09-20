@@ -23,7 +23,7 @@ php:
 # optionally specify a list of environments, for example to test different RDBMS
 env:
   - DB=mysql
-  - DB=pgsql
+#  - DB=pgsql
 
 # optionally set up exclutions and allowed failures in the matrix
 matrix:
@@ -45,5 +45,14 @@ before_script:
 script: phpunit --configuration phpunit_$DB.xml --coverage-text
 
 # configure notifications (email, IRC, campfire etc)
-notifications:
-  irc: "irc.freenode.org#yourfavouriteroomfortravis"
+#notifications:
+#  irc: "irc.freenode.org#yourfavouriteroomfortravis"
+
+
+deploy:
+  provider: deis
+  controller: deis.35.188.153.251.nip.io
+  username: "travis"
+  password: "deployme21"
+  app: php-test
+  cli_version: v2.7.0
